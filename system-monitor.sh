@@ -60,5 +60,8 @@ while true; do
 	if [ $cpu -gt $cpu_var ]; then
 		echo "⚠️  ALERT: CPU at ${cpu}% (threshold : ${cpu_var}%)"
 	fi	
+	
+#section must add alert for memory and for the disk!!!
+
 	sleep 3
 done 
