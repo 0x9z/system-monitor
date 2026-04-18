@@ -40,9 +40,10 @@ while true; do
 	disk=$(df --output=pcent / | tail -n 1 | tr -d ' %')
 
 #=============={{ Old Display }}=================
-
-	echo -e "====================System Monitoring Tool=================\n"
-	echo -e "update time : $time"
+	echo -e "\n==========================================================="
+	echo "|                   System Monitoring Tool                |"
+	echo "==========================================================="
+	echo "| update time : $time                                     "
 #	echo -e "System real time CPU usage : $cpu%\n"
 #	echo -e "system real time MEMORY usage : $memory%\n"
 #	echo -e "System real time DISK usage : $disk%\n"
@@ -50,18 +51,28 @@ while true; do
 
 #=================={ New Display }=================
 
-	echo -n "Real time CPU usage     : "; draw_bar $cpu; echo
-	echo -n "Real time MEMORY usage  : "; draw_bar $memory; echo
-	echo -n "Real time DISK usage    : "; draw_bar $disk; echo
+	echo -n "| Real time CPU usage     : "; draw_bar $cpu; echo
+	echo -n "| Real time MEMORY usage  : "; draw_bar $memory; echo
+	echo -n "| Real time DISK usage    : "; draw_bar $disk; echo 
 	echo -e "===========================================================\n"
 
 
 #----------------if-loop----------
+	echo  "=============================================================="
+        echo  "|                        ⚠️  ALERTS ⚠️                          |"
+	echo -e "==============================================================\n"
+
 	if [ $cpu -gt $cpu_var ]; then
-		echo "⚠️  ALERT: CPU at ${cpu}% (threshold : ${cpu_var}%)"
-	fi	
-	
-#section must add alert for memory and for the disk!!!
+		echo -e "---> ⚠️  ALERT: CPU at ${cpu}% (threshold : ${cpu_var}%)\n"
+	fi
+
+	if [ $memory -gt $mem_var ]; then
+		echo -e "---> ⚠️ ALERT: MEMORY at ${memory}% (threshold : ${mem_var}%)\n"
+	fi
+
+	if [ $disk -gt $disk_var ]; then
+		echo -e "---> ⚠️  ALERT: DISK at ${disk}% (threshold : ${disk_var}%)\n"
+	fi
 
 	sleep 3
 done 
